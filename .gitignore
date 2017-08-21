@@ -10,5 +10,7 @@ examples/checkpoints/*
 examples/chatbot/processed/*
 examples/chatbot/checkpoints/*
 examples/chatbot/data_analysis.py
-
+examples/data/mnist
+examples/graphs
 assignments/chatbot/processed/*
+

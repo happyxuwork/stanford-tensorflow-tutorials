@@ -14,9 +14,9 @@ a = tf.constant(2)
 b = tf.constant(3)
 x = tf.add(a, b)
 with tf.Session() as sess:
-	writer = tf.summary.FileWriter('./graphs', sess.graph) 
+	writer = tf.summary.FileWriter('./graphs', sess.graph)
 	print(sess.run(x))
-writer.close() # close the writer when you’re done using it
+writer.close() # close the writer when you're done using it
 
 
 a = tf.constant([2, 2], name='a')
@@ -26,11 +26,11 @@ with tf.Session() as sess:
 	print(sess.run(x))
 # >> [[0 2]
 #	 [4 6]]
-
+shape = [2, 3]
 tf.zeros(shape, dtype=tf.float32, name=None)
 #creates a tensor of shape and all elements will be zeros (when ran in session)
 
-x = tf.zeros([2, 3], tf.int32) 
+x = tf.zeros([2, 3], tf.int32)
 y = tf.zeros_like(x, optimize=True)
 print(y)
 print(tf.get_default_graph().as_graph_def())
@@ -50,7 +50,7 @@ with tf.Session() as sess:
 	for _ in range(10):
 		print(sess.run(samples))
 
-t_0 = 19 
+t_0 = 19
 x = tf.zeros_like(t_0) # ==> 0
 y = tf.ones_like(t_0) # ==> 1
 
@@ -63,7 +63,7 @@ y = tf.ones_like(t_1) # ==> TypeError: Expected string, got 1 of type 'int' inst
 
 t_2 = [[True, False, False],
        [False, False, True],
-       [False, True, False]] 
+       [False, True, False]]
 x = tf.zeros_like(t_2) # ==> 2x2 tensor, all elements are False
 y = tf.ones_like(t_2) # ==> 2x2 tensor, all elements are True
 with tf.Session() as sess:
