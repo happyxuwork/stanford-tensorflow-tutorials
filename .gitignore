@@ -11,6 +11,9 @@ examples/chatbot/processed/*
 examples/chatbot/checkpoints/*
 examples/chatbot/data_analysis.py
 examples/data/mnist
+examples/data/text8.zip
+examples/processed
 examples/graphs
+examples/improved_graph
 assignments/chatbot/processed/*
 
