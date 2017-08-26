@@ -15,5 +15,6 @@ examples/data/text8.zip
 examples/processed
 examples/graphs
 examples/improved_graph
+examples/my_graph
 assignments/chatbot/processed/*
 
