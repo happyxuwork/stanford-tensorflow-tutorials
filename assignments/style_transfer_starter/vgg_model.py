@@ -1,4 +1,4 @@
-""" Load VGGNet weights needed for the implementation of the paper 
+""" Load VGGNet weights needed for the implementation of the paper
 "A Neural Algorithm of Artistic Style" by Gatys et al. in TensorFlow.
 
 Author: Chip Huyen (huyenn@stanford.edu)
@@ -38,10 +38,17 @@ def _conv2d_relu(vgg_layers, prev_layer, layer, layer_name):
     W and b returned from _weights() are numpy arrays, so you have
     to convert them to TF tensors using tf.constant.
     Note that you'll have to do apply relu on the convolution.
-    Hint for choosing strides size: 
+    Hint for choosing strides size:
         for small images, you probably don't want to skip any pixel
     """
-    pass
+    with tf.variable_scope(layer_name):
+        npW, npb = _weights(vgg_layers, layer, layer_name)
+        W = tf.constant(npW, name='weight')
+        b = tf.constant(npb, name='bias')
+        conv = tf.nn.conv2d(input=prev_layer, filter=W, strides=[1, 1, 1, 1],
+                            padding='SAME', name='conv')
+        relu = tf.nn.relu(conv + b, name='relu-conv')
+        return relu
 
 def _avgpool(prev_layer):
     """ Return the average pooling layer. The paper suggests that average pooling
@@ -53,7 +60,8 @@ def _avgpool(prev_layer):
         the output of the tf.nn.avg_pool() function.
     Hint for choosing strides and kszie: choose what you feel appropriate
     """
-    pass
+    return tf.nn.avg_pool(prev_layer, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1],
+                          padding='SAME', name='pool')
 
 def load_vgg(path, input_image):
     """ Load VGG into a TensorFlow model.
@@ -62,7 +70,7 @@ def load_vgg(path, input_image):
     vgg = scipy.io.loadmat(path)
     vgg_layers = vgg['layers']
 
-    graph = {} 
+    graph = {}
     graph['conv1_1']  = _conv2d_relu(vgg_layers, input_image, 0, 'conv1_1')
     graph['conv1_2']  = _conv2d_relu(vgg_layers, graph['conv1_1'], 2, 'conv1_2')
     graph['avgpool1'] = _avgpool(graph['conv1_2'])
@@ -84,5 +92,5 @@ def load_vgg(path, input_image):
     graph['conv5_3']  = _conv2d_relu(vgg_layers, graph['conv5_2'], 32, 'conv5_3')
     graph['conv5_4']  = _conv2d_relu(vgg_layers, graph['conv5_3'], 34, 'conv5_4')
     graph['avgpool5'] = _avgpool(graph['conv5_4'])
-    
+
     return graph

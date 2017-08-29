@@ -18,3 +18,12 @@ examples/improved_graph
 examples/my_graph
 assignments/chatbot/processed/*
 
+assignments/style_transfer/outputs
+assignments/style_transfer/graphs
+assignments/style_transfer/checkpoints
+
+assignments/style_transfer_starter/outputs
+assignments/style_transfer_starter/graphs
+assignments/style_transfer_starter/checkpoints
+
+*.mat
